@@ -8,17 +8,17 @@ public abstract class Animal {
 
     public static ArrayList<Animal> allAnimals = new ArrayList<>();
     private String name;
-    private String favFood;
+    private String favouriteFood;
     private int age;
-    private LocalDate startZoo;
+    private LocalDate dateAddedToTheZoo;
     private float weight;
     private float height;
 
-    public Animal(String name, String favFood, int age, LocalDate startZoo, float weight, float height) {
+    public Animal(String name, String favouriteFood, int age, LocalDate dateAddedToTheZoo, float weight, float height) {
         setName(name);
-        setFavFood(favFood);
+        setFavouriteFoodFood(favouriteFood);
         setAge(age);
-        setStartZoo(startZoo);
+        setDateAddedToTheZoo(dateAddedToTheZoo);
         setWeight(weight);
         setHeight(height);
         allAnimals.add(this);
@@ -32,12 +32,12 @@ public abstract class Animal {
         this.name = name;
     }
 
-    public String getFavFood() {
-        return favFood;
+    public String getFavouriteFoodFood() {
+        return favouriteFood;
     }
 
-    public void setFavFood(String favFood) {
-        this.favFood = favFood;
+    public void setFavouriteFoodFood(String favouriteFood) {
+        this.favouriteFood = favouriteFood;
     }
 
     public int getAge() {
@@ -48,12 +48,12 @@ public abstract class Animal {
         this.age = age;
     }
 
-    public LocalDate getStartZoo() {
-        return startZoo;
+    public LocalDate getDateAddedToTheZoo() {
+        return dateAddedToTheZoo;
     }
 
-    public void setStartZoo(LocalDate startZoo) {
-        this.startZoo = startZoo;
+    public void setDateAddedToTheZoo(LocalDate dateAddedToTheZoo) {
+        this.dateAddedToTheZoo = dateAddedToTheZoo;
     }
 
     public float getWeight() {
@@ -76,9 +76,9 @@ public abstract class Animal {
     public String toString() {
         return "{" +
                 "name='" + getName() + '\'' +
-                ", favFood='" + getFavFood() + '\'' +
+                ", favFood='" + getFavouriteFoodFood() + '\'' +
                 ", age=" + getAge() +
-                " years old, startZoo=" + getStartZoo() +
+                " years old, startZoo=" + getDateAddedToTheZoo() +
                 ", weight=" + getWeight() +
                 "kg, height=" + getHeight();
     }
