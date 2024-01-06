@@ -6,17 +6,17 @@ import java.time.LocalDate;
 
 public class Lion extends Animal
 {
-    private int tailLenght;
-    public Lion(String name, String favFood, int age, LocalDate startZoo, float weight, int height,int tailLenght) {
+    private float tailLenght;
+    public Lion(String name, String favFood, int age, LocalDate startZoo, float weight, int height,float tailLenght) {
         super(name, favFood, age, startZoo, weight, height);
         setTailLenght(tailLenght);
     }
 
-    public int getTailLenght() {
+    public float getTailLenght() {
         return tailLenght;
     }
 
-    public void setTailLenght(int tailLenght) {
+    public void setTailLenght(float tailLenght) {
         this.tailLenght = tailLenght;
     }
 

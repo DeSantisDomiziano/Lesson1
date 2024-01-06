@@ -7,7 +7,10 @@ import org.java.animals.entity.Tiger;
 
 import java.util.ArrayList;
 
-public abstract class UtilityMethod {
+public final class UtilityMethod {
+
+    private UtilityMethod() {
+    }
 
     public static <T extends Animal> void getHeaviestAndLightest(ArrayList<T> animals){
 
@@ -54,6 +57,7 @@ public abstract class UtilityMethod {
         int longestTail = 0;
 
         for (Animal animal: Animal.allAnimals) {
+            //
 
             if (animal instanceof Tiger tiger) {
 

@@ -57,5 +57,13 @@ public class Main {
         System.out.println(UtilityMethod.getLongestTail());
         System.out.println(UtilityMethod.getLongestWingspan());
 
+        /*
+         * TODO change favFood and starZoo
+         * TODO make zoo class for arraylist
+         * TODO convert foreach into stream
+         * TODO refactor name utilitymethod
+         * TODO rendi dinamico il metodo gettailslength
+         */
+
     }
 }

@@ -12,9 +12,9 @@ public abstract class Animal {
     private int age;
     private LocalDate startZoo;
     private float weight;
-    private int height;
+    private float height;
 
-    public Animal(String name, String favFood, int age, LocalDate startZoo, float weight, int height) {
+    public Animal(String name, String favFood, int age, LocalDate startZoo, float weight, float height) {
         setName(name);
         setFavFood(favFood);
         setAge(age);
@@ -41,8 +41,6 @@ public abstract class Animal {
     }
 
     public int getAge() {
-
-
         return age;
     }
 
@@ -66,11 +64,11 @@ public abstract class Animal {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
