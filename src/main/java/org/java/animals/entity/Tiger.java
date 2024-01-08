@@ -1,30 +1,14 @@
 package org.java.animals.entity;
 
-import org.java.animals.abst.Animal;
+import org.java.animals.abst.Tail;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Tiger extends Animal
+public class Tiger extends Tail
 {
-    private int tailLenght;
 
-    public Tiger(String name, String favFood, int age, LocalDate startZoo, float weight, int height, int tailLenght)
-    {
-        super(name, favFood, age, startZoo, weight, height);
-        setTailLenght(tailLenght);
-    }
-
-    public int getTailLenght() {
-        return tailLenght;
-    }
-
-    public void setTailLenght(int tailLenght) {
-        this.tailLenght = tailLenght;
-    }
-
-    @Override
-    public String toString() {
-        return "Tiger" + super.toString() + "cm, tail-lenght=" + getTailLenght() + "cm}";
+    public Tiger(String name, String favouriteFood, int age, LocalDate dateAddedToTheZoo, float weight, float height, float tail) {
+        super(name, favouriteFood, age, dateAddedToTheZoo, weight, height, tail);
     }
 }
