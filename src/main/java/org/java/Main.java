@@ -1,5 +1,7 @@
 package org.java;
 
+import org.java.animals.abst.Tail;
+import org.java.animals.abst.Wingspan;
 import org.java.animals.entity.Eagle;
 import org.java.animals.entity.Lion;
 import org.java.animals.entity.Tiger;
@@ -29,14 +31,13 @@ public class Main {
 
 
         zoo.getAnimals().stream().forEach(System.out::println);
+        System.out.println("\n############################################\n");
 
         zoo.getHeaviestAndLightest(Lion.class);
         zoo.getTallestAndShortest(Eagle.class);
+        System.out.println("\n############################################\n");
 
-
-        /*
-         * TODO rendi dinamico il metodo gettailslength
-         */
+        zoo.getLongestTailOrWingspan(Wingspan.class);
 
     }
 }

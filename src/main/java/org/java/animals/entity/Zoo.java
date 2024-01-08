@@ -1,17 +1,16 @@
 package org.java.animals.entity;
 
 import org.java.animals.abst.Animal;
+import org.java.animals.abst.Tail;
+import org.java.animals.abst.Wingspan;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class Zoo {
 
     /*
-    per ogni specie, ricerca dell'esemplare più alto e più basso
-    per ogni specie, ricerca dell'esemplare più pesante e più leggero
     per gli animali dotati di coda, l'esemplare con la coda più lunga di tutto lo zoo nel complesso
     per gli animali dotati di ali, l'esemplare con la maggiore apertura alare
      */
@@ -58,5 +57,30 @@ public class Zoo {
 
         System.out.println("Tallest: " + tallest);
         System.out.println("Shortest: " + shortest);
+    }
+
+    public <T extends Animal> void getLongestTailOrWingspan(Class<T> clazz){
+
+        if(Tail.class.isAssignableFrom(clazz)) {
+
+            Tail longestTail = animals.stream()
+                    .filter(clazz::isInstance)
+                    .map(animal -> (Tail) animal)
+                    .max(Comparator.comparing(Tail::getTailLenght))
+                    .orElse(null);
+
+            System.out.println(longestTail.getTailLenght());
+
+        } else if (Wingspan.class.isAssignableFrom(clazz)) {
+
+            Wingspan longestWingsSpan = animals.stream()
+                    .filter(clazz::isInstance)
+                    .map(animal -> (Wingspan) animal)
+                    .max(Comparator.comparing(Wingspan::getWingsSpan))
+                    .orElse(null);
+
+            System.out.println(longestWingsSpan.getWingsSpan());
+        }
+
     }
 }
