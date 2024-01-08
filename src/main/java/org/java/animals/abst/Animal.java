@@ -79,4 +79,5 @@ public abstract class Animal {
                 ", weight=" + getWeight() +
                 "kg, height=" + getHeight();
     }
+
 }
