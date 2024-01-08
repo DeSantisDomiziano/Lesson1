@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Animal {
-
-    public static ArrayList<Animal> allAnimals = new ArrayList<>();
     private String name;
     private String favouriteFood;
     private int age;
@@ -21,7 +19,6 @@ public abstract class Animal {
         setDateAddedToTheZoo(dateAddedToTheZoo);
         setWeight(weight);
         setHeight(height);
-        allAnimals.add(this);
     }
 
     public String getName() {

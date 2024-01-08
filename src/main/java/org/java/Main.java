@@ -1,10 +1,9 @@
 package org.java;
 
-import org.java.animals.abst.Animal;
 import org.java.animals.entity.Eagle;
 import org.java.animals.entity.Lion;
 import org.java.animals.entity.Tiger;
-import org.java.animals.utility.UtilityMethod;
+import org.java.animals.utility.UtilityAnimal;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,28 +36,8 @@ public class Main {
 
         System.out.println("\n################################\n");
 
-        UtilityMethod.getHeaviestAndLightest(listTiger);
-
-        System.out.println("\n################################\n");
-
-        ArrayList<Lion> listLion = new ArrayList<>();
-
-        listLion.add(l);
-        listLion.add(l1);
-        listLion.add(l2);
-
-        UtilityMethod.getHeaviestAndLightest(listLion);
-
-        System.out.println("\n################################\n");
-
-        UtilityMethod.getHighestAndShortest(listTiger);
-        System.out.println("\n################################\n" );
-
-        System.out.println(UtilityMethod.getLongestTail());
-        System.out.println(UtilityMethod.getLongestWingspan());
 
         /*
-         * TODO change favFood and starZoo
          * TODO make zoo class for arraylist
          * TODO convert foreach into stream
          * TODO refactor name utilitymethod
