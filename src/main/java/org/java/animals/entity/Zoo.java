@@ -6,8 +6,31 @@ import org.java.animals.abst.AnimalWithWings;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Zoo {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Zoo zoo = (Zoo) o;
+        return Objects.equals(animals, zoo.animals) && Objects.equals(animalsWithTail, zoo.animalsWithTail) && Objects.equals(animalsWithWings, zoo.animalsWithWings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(animals, animalsWithTail, animalsWithWings);
+    }
+
+    private Zoo(){}
+
+    private static class SingletonHelper {
+        private static final Zoo INSTANCE = new Zoo();
+    }
+
+    public static Zoo getInstance() {
+        return  SingletonHelper.INSTANCE;
+    }
 
     private ArrayList<Animal> animals = new ArrayList<>();
     private ArrayList<AnimalWithTail> animalsWithTail = new ArrayList<>();

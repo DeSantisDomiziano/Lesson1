@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Zoo zoo = new Zoo();
+        Zoo zoo = Zoo.getInstance();
 
 
         zoo.addAnimal(new Tiger("Sid", "eagle", 3, LocalDate.now(), 100.75f,130, 30));
