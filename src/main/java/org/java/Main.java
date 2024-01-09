@@ -1,14 +1,13 @@
 package org.java;
 
-import org.java.animals.abst.Tail;
-import org.java.animals.abst.Wingspan;
+import org.java.animals.abst.AnimalWithTail;
+import org.java.animals.abst.AnimalWithWings;
 import org.java.animals.entity.Eagle;
 import org.java.animals.entity.Lion;
 import org.java.animals.entity.Tiger;
 import org.java.animals.entity.Zoo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,15 +28,23 @@ public class Main {
         zoo.addAnimal(new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55));
         zoo.addAnimal(new Eagle("Fulvio", "other", 5, LocalDate.now(), 23.35f, 62, 59));
 
+        zoo.addAnimalWithTailIntoList(new Lion("Giorgio", "t-rex", 100, LocalDate.now(), 87.8f, 122,46));
+        zoo.addAnimalWithWingsIntoList(new Eagle("PierFausto", "homework", 5, LocalDate.now(), 22.39f, 63.4f, 54.99f));
 
-        zoo.getAnimals().stream().forEach(System.out::println);
+
+        zoo.getAnimals().forEach(System.out::println);
+
         System.out.println("\n############################################\n");
 
         zoo.getHeaviestAndLightest(Lion.class);
         zoo.getTallestAndShortest(Eagle.class);
+
         System.out.println("\n############################################\n");
 
-        zoo.getLongestTailOrWingspan(Wingspan.class);
+        zoo.getLongestTail(AnimalWithTail.class);
+        zoo.getLongestWingsSpan(AnimalWithWings.class);
+
+
 
     }
 }

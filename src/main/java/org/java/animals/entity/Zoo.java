@@ -1,20 +1,17 @@
 package org.java.animals.entity;
 
 import org.java.animals.abst.Animal;
-import org.java.animals.abst.Tail;
-import org.java.animals.abst.Wingspan;
+import org.java.animals.abst.AnimalWithTail;
+import org.java.animals.abst.AnimalWithWings;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Optional;
 
 public class Zoo {
 
-    /*
-    per gli animali dotati di coda, l'esemplare con la coda più lunga di tutto lo zoo nel complesso
-    per gli animali dotati di ali, l'esemplare con la maggiore apertura alare
-     */
     private ArrayList<Animal> animals = new ArrayList<>();
+    private ArrayList<AnimalWithTail> animalsWithTail = new ArrayList<>();
+    private ArrayList<AnimalWithWings> animalsWithWings = new ArrayList<>();
 
     public ArrayList<Animal> getAnimals() {
         return animals;
@@ -24,17 +21,27 @@ public class Zoo {
         this.animals.add(animal);
     }
 
+    public <T extends AnimalWithTail> void addAnimalWithTailIntoList(AnimalWithTail animalWithTail){
+        addAnimal(animalWithTail);
+        this.animalsWithTail.add(animalWithTail);
+    }
+
+    public  <T extends  AnimalWithWings> void  addAnimalWithWingsIntoList(AnimalWithWings animalWithWings){
+        addAnimal(animalWithWings);
+        this.animalsWithWings.add(animalWithWings);
+    }
+
     public <T extends Animal> void getHeaviestAndLightest(Class<T> clazz){
 
         T heaviest = animals.stream()
                 .filter(clazz::isInstance)
-                .map(animal -> (T) animal)
+                .map(clazz::cast)
                 .max(Comparator.comparing(Animal::getWeight))
                 .orElse(null);
 
         T lightest = animals.stream()
                 .filter(clazz::isInstance)
-                .map(animal -> (T) animal)
+                .map(clazz::cast)
                 .min(Comparator.comparing(Animal::getWeight))
                 .orElse(null);
 
@@ -45,13 +52,13 @@ public class Zoo {
     public <T extends Animal> void getTallestAndShortest(Class<T> clazz) {
         T tallest = animals.stream()
                 .filter(clazz::isInstance)
-                .map(animal -> (T) animal)
+                .map(clazz::cast)
                 .max(Comparator.comparing(Animal::getHeight))
                 .orElse(null);
 
         T shortest = animals.stream()
                 .filter(clazz::isInstance)
-                .map(animal -> (T) animal)
+                .map(clazz::cast)
                 .min(Comparator.comparing(Animal::getHeight))
                 .orElse(null);
 
@@ -59,28 +66,27 @@ public class Zoo {
         System.out.println("Shortest: " + shortest);
     }
 
-    public <T extends Animal> void getLongestTailOrWingspan(Class<T> clazz){
+    public <T extends AnimalWithTail> void getLongestTail(Class<T> clazz){
 
-        if(Tail.class.isAssignableFrom(clazz)) {
-
-            Tail longestTail = animals.stream()
+            AnimalWithTail longestTail = animalsWithTail.stream()
                     .filter(clazz::isInstance)
-                    .map(animal -> (Tail) animal)
-                    .max(Comparator.comparing(Tail::getTailLenght))
+                    //.map(clazz::cast)
+                    .max(Comparator.comparing(AnimalWithTail::getTailLength))
                     .orElse(null);
 
-            System.out.println(longestTail.getTailLenght());
+            System.out.println(longestTail.getTailLength());
 
-        } else if (Wingspan.class.isAssignableFrom(clazz)) {
+    }
 
-            Wingspan longestWingsSpan = animals.stream()
-                    .filter(clazz::isInstance)
-                    .map(animal -> (Wingspan) animal)
-                    .max(Comparator.comparing(Wingspan::getWingsSpan))
-                    .orElse(null);
+    public <T extends AnimalWithWings> void getLongestWingsSpan(Class<T> clazz) {
 
-            System.out.println(longestWingsSpan.getWingsSpan());
-        }
+        AnimalWithWings longestWingsSpan = animalsWithWings.stream()
+                .filter(clazz::isInstance)
+                //.map(clazz::cast)
+                .max(Comparator.comparing(AnimalWithWings::getWingsSpan))
+                .orElse(null);
+
+        System.out.println(longestWingsSpan.getWingsSpan());
 
     }
 }
