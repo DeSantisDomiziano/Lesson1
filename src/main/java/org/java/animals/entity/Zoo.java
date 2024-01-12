@@ -6,22 +6,12 @@ import org.java.animals.abst.AnimalWithWings;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Zoo {
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Zoo zoo = (Zoo) o;
-        return Objects.equals(animals, zoo.animals) && Objects.equals(animalsWithTail, zoo.animalsWithTail) && Objects.equals(animalsWithWings, zoo.animalsWithWings);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(animals, animalsWithTail, animalsWithWings);
-    }
-
+    //Start Bill Pugh Singleton
     private Zoo(){}
 
     private static class SingletonHelper {
@@ -31,39 +21,42 @@ public class Zoo {
     public static Zoo getInstance() {
         return  SingletonHelper.INSTANCE;
     }
+    //End Bill Pugh Singleton
 
-    private ArrayList<Animal> animals = new ArrayList<>();
-    private ArrayList<AnimalWithTail> animalsWithTail = new ArrayList<>();
-    private ArrayList<AnimalWithWings> animalsWithWings = new ArrayList<>();
+    private Map<Class<? extends Animal>, ArrayList<Animal>> allAnimals = new HashMap<>();
 
-    public ArrayList<Animal> getAnimals() {
-        return animals;
+    private void addAnimal(Class<? extends Animal> keyClass, Animal animal) {
+        allAnimals.computeIfAbsent(keyClass, k -> new ArrayList<>()).add(animal);
     }
 
-    public void addAnimal(Animal animal) {
-        this.animals.add(animal);
+    public void addAnimalByClass(Class<?> clazz, Animal animal){
+
+        if (clazz != animal.getClass()){
+            System.out.println("Class cannot be different from the animal's class\n" +
+                        "Class: " + clazz + " | Animal's Class: " + animal.getClass());
+        }
+        else if(!allAnimals.containsKey(clazz)){
+            addAnimal((Class<? extends Animal>) clazz, animal);
+        }
+        else{
+            allAnimals.get(clazz).add(animal);
+        }
     }
 
-    public <T extends AnimalWithTail> void addAnimalWithTailIntoList(AnimalWithTail animalWithTail){
-        addAnimal(animalWithTail);
-        this.animalsWithTail.add(animalWithTail);
+    public ArrayList<? extends Animal> getAnimalByClass(Class<?> clazz){
+        return allAnimals.get(clazz);
     }
 
-    public  <T extends  AnimalWithWings> void  addAnimalWithWingsIntoList(AnimalWithWings animalWithWings){
-        addAnimal(animalWithWings);
-        this.animalsWithWings.add(animalWithWings);
-    }
+    public <T extends Animal> void getHeaviestAndLightestByClass(Class<T> clazz){
 
-    public <T extends Animal> void getHeaviestAndLightest(Class<T> clazz){
-
-        T heaviest = animals.stream()
-                .filter(clazz::isInstance)
+        T heaviest = getAnimalByClass(clazz).stream()
+                //.filter(clazz::isInstance)
                 .map(clazz::cast)
                 .max(Comparator.comparing(Animal::getWeight))
                 .orElse(null);
 
-        T lightest = animals.stream()
-                .filter(clazz::isInstance)
+        T lightest = getAnimalByClass(clazz).stream()
+                //.filter(clazz::isInstance)
                 .map(clazz::cast)
                 .min(Comparator.comparing(Animal::getWeight))
                 .orElse(null);
@@ -73,14 +66,14 @@ public class Zoo {
     }
 
     public <T extends Animal> void getTallestAndShortest(Class<T> clazz) {
-        T tallest = animals.stream()
-                .filter(clazz::isInstance)
+        T tallest = getAnimalByClass(clazz).stream()
+                //.filter(clazz::isInstance)
                 .map(clazz::cast)
                 .max(Comparator.comparing(Animal::getHeight))
                 .orElse(null);
 
-        T shortest = animals.stream()
-                .filter(clazz::isInstance)
+        T shortest = getAnimalByClass(clazz).stream()
+                //.filter(clazz::isInstance)
                 .map(clazz::cast)
                 .min(Comparator.comparing(Animal::getHeight))
                 .orElse(null);
@@ -89,23 +82,23 @@ public class Zoo {
         System.out.println("Shortest: " + shortest);
     }
 
-    public <T extends AnimalWithTail> void getLongestTail(Class<T> clazz){
 
-            AnimalWithTail longestTail = animalsWithTail.stream()
-                    .filter(clazz::isInstance)
-                    //.map(clazz::cast)
-                    .max(Comparator.comparing(AnimalWithTail::getTailLength))
-                    .orElse(null);
+    public <T extends AnimalWithTail> void getLongestTailByClass(Class<T> clazz){
 
-            System.out.println(longestTail.getTailLength());
+        AnimalWithTail longestTail = getAnimalByClass(clazz).stream()
+                .filter(animal -> animal instanceof AnimalWithTail)
+                .map(clazz::cast)
+                .max(Comparator.comparing(AnimalWithTail::getTailLength))
+                .orElse(null);
 
+        System.out.println(longestTail.getTailLength());
     }
 
     public <T extends AnimalWithWings> void getLongestWingsSpan(Class<T> clazz) {
 
-        AnimalWithWings longestWingsSpan = animalsWithWings.stream()
-                .filter(clazz::isInstance)
-                //.map(clazz::cast)
+        AnimalWithWings longestWingsSpan = getAnimalByClass(clazz).stream()
+                .filter(animal -> animal instanceof AnimalWithWings)
+                .map(clazz::cast)
                 .max(Comparator.comparing(AnimalWithWings::getWingsSpan))
                 .orElse(null);
 
