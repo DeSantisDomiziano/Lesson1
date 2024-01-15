@@ -1,7 +1,5 @@
 package org.java;
 
-import org.java.animals.abst.Animal;
-
 import org.java.animals.entity.Eagle;
 import org.java.animals.entity.Lion;
 import org.java.animals.entity.Tiger;
@@ -9,8 +7,6 @@ import org.java.animals.entity.Zoo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,22 +27,39 @@ public class Main {
         Eagle e2 = new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55);
         Eagle e3 = new Eagle("Fulvio", "other", 5, LocalDate.now(), 23.35f, 62, 59);
 
-        zoo.addAnimalByClass(Tiger.class, t1);
-        zoo.addAnimalByClass(Tiger.class, t2);
-        zoo.addAnimalByClass(Tiger.class, t3);
+        zoo.addAnimal(t1);
+        zoo.addAnimal(t2);
+        zoo.addAnimal(t3);
 
-        zoo.addAnimalByClass(Lion.class, l1);
-        zoo.addAnimalByClass(Lion.class, l2);
-        zoo.addAnimalByClass(Lion.class, l3);
+        zoo.addAnimal(l1);
+        zoo.addAnimal(l2);
+        zoo.addAnimal(l3);
 
-        zoo.addAnimalByClass(Lion.class, e1);
-        zoo.addAnimalByClass(Eagle.class, e2);
-        zoo.addAnimalByClass(Eagle.class, e3);
+        zoo.addAnimal(e1);
+        zoo.addAnimal(e2);
+        zoo.addAnimal(e3);
 
-        zoo.getAnimalByClass(l1.getClass()).forEach(System.out::println);
-        zoo.getHeaviestAndLightestByClass(l1.getClass());
-        zoo.getTallestAndShortest(l1.getClass());
-        zoo.getLongestTailByClass(l1.getClass());
-        zoo.getLongestWingsSpan(e1.getClass());
+
+        zoo.getAnimalsByClass(Tiger.class).forEach(System.out::println);
+
+        // TODO cerchiamo di far compilare il codice qua sotto
+        ArrayList<Lion> arrayListLion = new ArrayList<>(zoo.getAnimalsByClass(Lion.class));
+        arrayListLion.forEach(System.out::println);
+
+        Lion haviestLion = zoo.getHeaviestByClass(Lion.class);
+        System.out.println(haviestLion);
+
+        Lion tallestLion = zoo.getTallestByClass(Lion.class);
+        System.out.println(tallestLion);
+
+        System.out.println(zoo.getLongestTailByClass(Tiger.class));
+
+        System.out.println(zoo.getLongestWingsSpan(Eagle.class));
+
+        Eagle lightestEagle = zoo.getLightestByClass(Eagle.class);
+        System.out.println(lightestEagle);
+
+        Tiger shortestTiger = zoo.getShortestByClass(Tiger.class);
+        System.out.println(shortestTiger);
     }
 }
